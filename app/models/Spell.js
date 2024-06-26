@@ -1,6 +1,5 @@
 export class Spell {
   constructor(data) {
-    debugger
     this.name = data.name
     // FIXME this is going to cause issues
     // NOTE join is an array method that joins an array of strings into one single string with an optional seperator supplied as an argument
@@ -32,7 +31,7 @@ export class Spell {
     <div class="p-3">
       <h1>${this.name}</h1>
       <div>
-        <button onclick="app." class="btn btn-danger">
+        <button onclick="app.SandboxSpellsController.saveSpell()" class="btn btn-danger">
          <i class="mdi mdi-feather"></i> Save Spell
         </button>
       </div>

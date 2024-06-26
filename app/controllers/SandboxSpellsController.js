@@ -1,5 +1,7 @@
 export class SandboxSpellsController {
-  constructor() {
-    console.log('🥪🔮');
+  constructor() { }
+
+  saveSpell() {
+    console.log('saving spell');
   }
 }

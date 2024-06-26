@@ -17,7 +17,8 @@ class SandboxSpellsService {
     const response = await api.post('api/spells', spellToSave)
 
     console.log('🐕✨🔮 CREATED SPELL', response.data);
-    // TODO maybe do some more stuff here later....
+    const newSpell = new Spell(response.data)
+    AppState.sandboxSpells.push(newSpell)
   }
 }
 

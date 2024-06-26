@@ -31,6 +31,15 @@ export class SandboxSpellsController {
     }
   }
 
+  async toggleSpellPreparation(spellId) {
+    try {
+      console.log('spell id is', spellId);
+    } catch (error) {
+      Pop.error(error)
+      console.error('COULD NOT UPDATE SPELL', error);
+    }
+  }
+
   drawMySpells() {
     const spells = AppState.sandboxSpells
     let innerHTMLString = ''

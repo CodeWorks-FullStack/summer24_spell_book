@@ -1,5 +1,7 @@
 export class Spell {
   constructor(data) {
+    // save the id from sandbox, or set it to string with no value
+    this.id = data.id || ''
     this.name = data.name
     // FIXME this is going to cause issues
     // NOTE join is an array method that joins an array of strings into one single string with an optional seperator supplied as an argument
@@ -16,6 +18,7 @@ export class Spell {
     this.concentration = data.concentration
     this.castingTime = data.casting_time
     this.duration = data.duration
+    this.prepared = data.prepared || false
     this.components = data.components.map(component => {
       switch (component) {
         case 'V':
@@ -52,7 +55,10 @@ export class Spell {
 
   get mySpellListHTMLTemplate() {
     return `
-     <button class="d-block btn btn-outline-info mb-1 w-100">${this.name}</button>
+      <div class="d-flex gap-1 align-items-center">
+        <input onchange="app.SandboxSpellsController.toggleSpellPreparation('${this.id}')" type="checkbox" class="checky">
+        <button class="d-block btn btn-outline-info mb-1 w-100">${this.name}</button>
+      </div>
     `
   }
 }

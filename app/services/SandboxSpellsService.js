@@ -3,6 +3,18 @@ import { Spell } from "../models/Spell.js";
 import { api } from "./AxiosService.js"
 
 class SandboxSpellsService {
+  async toggleSpellPreparation(spellId) {
+    const foundSpell = AppState.sandboxSpells.find((spell) => spell.id == spellId)
+
+    console.log('found the spell!', foundSpell);
+
+    // create an object with the opposite boolean of the spell's prepared status from the AppState
+    const spellData = { prepared: !foundSpell.prepared }
+    // PUT is an update request
+    const response = await api.put(`api/spells/${spellId}`, spellData)
+
+    console.log('🐕🔧🔮 UPDATED SPELL', response.data);
+  }
   async getMySpells() {
     const response = await api.get('api/spells')
 

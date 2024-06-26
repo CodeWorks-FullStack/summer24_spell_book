@@ -33,7 +33,7 @@ export class SandboxSpellsController {
 
   async toggleSpellPreparation(spellId) {
     try {
-      console.log('spell id is', spellId);
+      await sandboxSpellsService.toggleSpellPreparation(spellId)
     } catch (error) {
       Pop.error(error)
       console.error('COULD NOT UPDATE SPELL', error);

@@ -56,7 +56,7 @@ export class Spell {
   get mySpellListHTMLTemplate() {
     return `
       <div class="d-flex gap-1 align-items-center">
-        <input onchange="app.SandboxSpellsController.toggleSpellPreparation('${this.id}')" type="checkbox" class="checky">
+        <input onchange="app.SandboxSpellsController.toggleSpellPreparation('${this.id}')" type="checkbox" class="checky" ${this.prepared ? 'checked' : ''}>
         <button class="d-block btn btn-outline-info mb-1 w-100">${this.name}</button>
       </div>
     `

@@ -9,3 +9,8 @@
 .profile-picture.profile-picture-sm {
   height: 64px;
 }
+
+#dndSpellsList {
+  max-height: 86dvh;
+  overflow-y: auto;
+}

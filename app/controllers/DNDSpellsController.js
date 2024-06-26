@@ -21,11 +21,23 @@ export class DNDSpellsController {
     }
   }
 
+  async getSpellDetails(spellIndex) {
+    try {
+      console.log('Spell index', spellIndex);
+      await dndSpellsService.getSpellDetails(spellIndex)
+    } catch (error) {
+      Pop.error(error)
+      console.error('FAILED TO GET DND SPELL', error);
+    }
+  }
+
   drawSpells() {
     const spells = AppState.dndSpells
     let innerHTMLString = ''
     spells.forEach((spell) => {
-      innerHTMLString += `<button class="d-block btn btn-outline-info mb-1 w-100">${spell.name}</button>`
+      innerHTMLString += `
+      <button onclick="app.DNDSpellsController.getSpellDetails('${spell.index}')" class="d-block btn btn-outline-info mb-1 w-100">${spell.name}</button>
+      `
     })
     setHTML('dndSpellsList', innerHTMLString)
   }

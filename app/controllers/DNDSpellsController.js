@@ -1,5 +1,32 @@
+import { AppState } from "../AppState.js"
+import { dndSpellsService } from "../services/DNDSpellsService.js"
+import { Pop } from "../utils/Pop.js"
+import { setHTML } from "../utils/Writer.js"
+
 export class DNDSpellsController {
   constructor() {
-    console.log('DND Spells Controller loaded');
+    AppState.on('dndSpells', this.drawSpells)
+
+
+    this.getSpells()
+  }
+
+
+  async getSpells() {
+    try {
+      await dndSpellsService.getSpells()
+    } catch (error) {
+      Pop.error(error)
+      console.error('FAILED TO GET DND SPELLS', error);
+    }
+  }
+
+  drawSpells() {
+    const spells = AppState.dndSpells
+    let innerHTMLString = ''
+    spells.forEach((spell) => {
+      innerHTMLString += `<button class="d-block btn btn-outline-info mb-1 w-100">${spell.name}</button>`
+    })
+    setHTML('dndSpellsList', innerHTMLString)
   }
 }

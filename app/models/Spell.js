@@ -1,11 +1,14 @@
 export class Spell {
   constructor(data) {
+    debugger
     this.name = data.name
     // FIXME this is going to cause issues
     this.description = data.desc
-    this.damage = data.damage.damage_type.name
+    // NOTE if damage is falsy (undefined) default to ''. This only works if we use elvis operator
+    this.damage = data.damage?.damage_type.name || ''
     this.level = data.level
     this.range = data.range
+    // NOTE if material is falsy (undefined) default to ''
     this.material = data.material || ''
     this.ritual = data.ritual
     this.concentration = data.concentration
@@ -17,12 +20,16 @@ export class Spell {
   get detailsHTMLTemplate() {
     return `
     <div class="p-3">
-      <h1>Talk to Cats</h1>
-      <p class="fs-4">Level 7 Cat spell with 2000 kilometers range</p>
-      <p class="fs-4">This is a ritual spell that will need bat poop</p>
-      <p class="fs-4">Concentration required with a casting time of 1 year that will last 3 years</p>
-      <p class="fs-4">S V G</p>
-      <p class="fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, officiis.</p>
+      <h1>${this.name}</h1>
+      <p class="fs-4">Level ${this.level} ${this.damage} spell with a range of ${this.range}</p>
+      <p class="fs-4">
+        This ${this.ritual ? 'is' : 'is not'} a ritual spell that will need ${this.material ? this.material : 'nothing.'}
+      </p>
+      <p class="fs-4">
+        Concentration is ${this.concentration ? 'required' : 'not required'} with a casting time of ${this.castingTime} that ${this.duration == 'Instantaneous' ? 'is instantaneous' : `will last ${this.duration}`}.
+        </p>
+      <p class="fs-4">${this.components}</p>
+      <p class="fs-5">${this.description}</p>
     </div>
     `
   }

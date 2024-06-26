@@ -3,6 +3,7 @@ export class Spell {
     debugger
     this.name = data.name
     // FIXME this is going to cause issues
+    // NOTE join is an array method that joins an array of strings into one single string with an optional seperator supplied as an argument
     this.description = data.desc.join('<br><br>')
     // NOTE if damage is falsy (undefined) default to ''. This only works if we use elvis operator
     this.damage = data.damage?.damage_type.name || ''
@@ -14,7 +15,16 @@ export class Spell {
     this.concentration = data.concentration
     this.castingTime = data.casting_time
     this.duration = data.duration
-    this.components = data.components
+    this.components = data.components.map(component => {
+      switch (component) {
+        case 'V':
+          return 'Visual'
+        case 'S':
+          return 'Somatic'
+        case 'M':
+          return 'Material'
+      }
+    })
   }
 
   get detailsHTMLTemplate() {
@@ -28,7 +38,7 @@ export class Spell {
       <p class="fs-4">
         Concentration is ${this.concentration ? 'required' : 'not required'} with a casting time of ${this.castingTime} that ${this.duration == 'Instantaneous' ? 'is instantaneous' : `will last ${this.duration}`}.
         </p>
-      <p class="fs-4">${this.components}</p>
+      <p class="fs-4">${this.components.join(', ')}</p>
       <p class="fs-5">${this.description}</p>
     </div>
     `

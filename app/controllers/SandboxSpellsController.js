@@ -1,7 +1,7 @@
 import { AppState } from "../AppState.js";
 import { sandboxSpellsService } from "../services/SandboxSpellsService.js";
 import { Pop } from "../utils/Pop.js";
-import { setHTML } from "../utils/Writer.js";
+import { setHTML, setText } from "../utils/Writer.js";
 
 export class SandboxSpellsController {
   constructor() {
@@ -11,6 +11,7 @@ export class SandboxSpellsController {
     // NOTE wait until the user is logged in before getting their spells!
     AppState.on('account', this.getMySpells)
     AppState.on('sandboxSpells', this.drawMySpells)
+    AppState.on('sandboxSpells', this.drawPreparedSpellCount)
   }
 
   async saveSpell() {
@@ -45,5 +46,12 @@ export class SandboxSpellsController {
     let innerHTMLString = ''
     spells.forEach((spell) => innerHTMLString += spell.mySpellListHTMLTemplate)
     setHTML('mySpellsList', innerHTMLString)
+  }
+
+  drawPreparedSpellCount() {
+    const spells = AppState.sandboxSpells
+    // const preparedSpells = spells.filter((spell) => spell.prepared == true)
+    const preparedSpells = spells.filter((spell) => spell.prepared)
+    setText('preparedSpellCount', `${preparedSpells.length} / ${spells.length}`)
   }
 }

@@ -10,6 +10,7 @@ export class Spell {
     this.level = data.level
     this.range = data.range
     // NOTE if material is falsy (undefined) default to ''
+    // FIXME maybe update the API maxLength on this one
     this.material = data.material || ''
     this.ritual = data.ritual
     this.concentration = data.concentration
@@ -46,6 +47,12 @@ export class Spell {
       <p class="fs-4">${this.components.join(', ')}</p>
       <p class="fs-5">${this.description}</p>
     </div>
+    `
+  }
+
+  get mySpellListHTMLTemplate() {
+    return `
+     <button class="d-block btn btn-outline-info mb-1 w-100">${this.name}</button>
     `
   }
 }

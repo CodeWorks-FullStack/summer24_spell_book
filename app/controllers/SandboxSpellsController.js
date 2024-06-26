@@ -1,6 +1,7 @@
 import { AppState } from "../AppState.js";
 import { sandboxSpellsService } from "../services/SandboxSpellsService.js";
 import { Pop } from "../utils/Pop.js";
+import { setHTML } from "../utils/Writer.js";
 
 export class SandboxSpellsController {
   constructor() {
@@ -9,6 +10,7 @@ export class SandboxSpellsController {
 
     // NOTE wait until the user is logged in before getting their spells!
     AppState.on('account', this.getMySpells)
+    AppState.on('sandboxSpells', this.drawMySpells)
   }
 
   async saveSpell() {
@@ -27,5 +29,12 @@ export class SandboxSpellsController {
       Pop.error(error)
       console.error('COULD NOT GET MY SPELLS', error);
     }
+  }
+
+  drawMySpells() {
+    const spells = AppState.sandboxSpells
+    let innerHTMLString = ''
+    spells.forEach((spell) => innerHTMLString += spell.mySpellListHTMLTemplate)
+    setHTML('mySpellsList', innerHTMLString)
   }
 }

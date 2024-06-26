@@ -3,7 +3,7 @@ export class Spell {
     debugger
     this.name = data.name
     // FIXME this is going to cause issues
-    this.description = data.desc
+    this.description = data.desc.join('<br><br>')
     // NOTE if damage is falsy (undefined) default to ''. This only works if we use elvis operator
     this.damage = data.damage?.damage_type.name || ''
     this.level = data.level
@@ -37,7 +37,7 @@ export class Spell {
 
 // NOTE schema from Sandbox API
 // ✅ name: String, required
-//  description: String, required
+// ✅ description: String, required
 // ✅ damage: String,
 // ✅ level: Number,
 // ✅ range: String, required

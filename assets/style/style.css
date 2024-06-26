@@ -10,7 +10,7 @@
   height: 64px;
 }
 
-#dndSpellsList {
+.scroll {
   max-height: 86dvh;
   overflow-y: auto;
 }

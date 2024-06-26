@@ -13,6 +13,19 @@ export class Spell {
     this.duration = data.duration
     this.components = data.components
   }
+
+  get detailsHTMLTemplate() {
+    return `
+    <div class="p-3">
+      <h1>Talk to Cats</h1>
+      <p class="fs-4">Level 7 Cat spell with 2000 kilometers range</p>
+      <p class="fs-4">This is a ritual spell that will need bat poop</p>
+      <p class="fs-4">Concentration required with a casting time of 1 year that will last 3 years</p>
+      <p class="fs-4">S V G</p>
+      <p class="fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, officiis.</p>
+    </div>
+    `
+  }
 }
 
 // NOTE schema from Sandbox API

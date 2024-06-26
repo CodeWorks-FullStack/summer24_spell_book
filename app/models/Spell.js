@@ -31,6 +31,11 @@ export class Spell {
     return `
     <div class="p-3">
       <h1>${this.name}</h1>
+      <div>
+        <button onclick="app." class="btn btn-danger">
+         <i class="mdi mdi-feather"></i> Save Spell
+        </button>
+      </div>
       <p class="fs-4">Level ${this.level} ${this.damage} spell with a range of ${this.range}</p>
       <p class="fs-4">
         This ${this.ritual ? 'is' : 'is not'} a ritual spell that will need ${this.material ? this.material : 'nothing.'}

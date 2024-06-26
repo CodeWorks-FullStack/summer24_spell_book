@@ -6,7 +6,7 @@ import { setHTML } from "../utils/Writer.js"
 export class DNDSpellsController {
   constructor() {
     AppState.on('dndSpells', this.drawSpells)
-
+    AppState.on('activeSpell', this.drawSpellDetails)
 
     this.getSpells()
   }

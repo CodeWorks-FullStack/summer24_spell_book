@@ -3,9 +3,10 @@ export class Spell {
     this.name = data.name
     // FIXME this is going to cause issues
     // NOTE join is an array method that joins an array of strings into one single string with an optional seperator supplied as an argument
-    this.description = data.desc.join('<br><br>')
+    this.description = data.desc?.join('<br><br>') || data.description
     // NOTE if damage is falsy (undefined) default to ''. This only works if we use elvis operator
-    this.damage = data.damage?.damage_type.name || ''
+    // NOTE check to see if damage is a string (came from codeworks API). If it is a string, save it to the model. Otherwise, check to see if we can drill into the object. If we can, save then name from the object. If we can't, save an empty string
+    this.damage = typeof data.damage == 'string' ? data.damage : data.damage?.damage_type.name || ''
     this.level = data.level
     this.range = data.range
     // NOTE if material is falsy (undefined) default to ''

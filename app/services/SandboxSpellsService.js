@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js";
+import { Spell } from "../models/Spell.js";
 import { api } from "./AxiosService.js"
 
 class SandboxSpellsService {
@@ -6,6 +7,10 @@ class SandboxSpellsService {
     const response = await api.get('api/spells')
 
     console.log('🐕🔮🔮🔮🔮🔮 GETTING MY SPELLS', response.data);
+
+    const newSpells = response.data.map((spellPOJO) => new Spell(spellPOJO))
+
+    AppState.sandboxSpells = newSpells
   }
   async saveSpell() {
     const spellToSave = AppState.activeSpell

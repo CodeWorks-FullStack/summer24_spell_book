@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js";
+import { Spell } from "../models/Spell.js";
 import { dndApi } from "./AxiosService.js"
 
 class DNDSpellsService {
@@ -6,6 +7,11 @@ class DNDSpellsService {
     const response = await dndApi.get(`spells/${spellIndex}`)
 
     console.log('🐕🪄', response.data);
+
+    // NOTE we get a single object back from the API, no need to map!!!!
+    const newSpell = new Spell(response.data)
+
+    AppState.activeSpell = newSpell
   }
   async getSpells() {
     const response = await dndApi.get('spells')

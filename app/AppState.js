@@ -1,3 +1,4 @@
+import { Spell } from './models/Spell.js'
 import { EventEmitter } from './utils/EventEmitter.js'
 import { createObservableProxy } from './utils/ObservableProxy.js'
 
@@ -12,6 +13,12 @@ class ObservableAppState extends EventEmitter {
    * @type {object[]}
    */
   dndSpells = []
+
+  // NOTE we will store a singe spell here, but there won't be one on page load
+  /**
+   * @type {Spell}
+   */
+  activeSpell = null
 }
 
 export const AppState = createObservableProxy(new ObservableAppState())

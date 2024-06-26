@@ -41,4 +41,10 @@ export class DNDSpellsController {
     })
     setHTML('dndSpellsList', innerHTMLString)
   }
+
+  drawSpellDetails() {
+    const spell = AppState.activeSpell
+    // NOTE we just have one spell stored here in the appstate, forEach will not work!
+    setHTML('spellDetails', spell.detailsHTMLTemplate)
+  }
 }

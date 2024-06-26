@@ -11,9 +11,10 @@ export const api = axios.create({
 })
 
 // @ts-ignore
+// NOTE we will use this axios instance to interact with the DND API specifically
 export const dndApi = axios.create({
-  baseURL: 'https://www.dnd5eapi.co/api',
-  timeout: 3000
+  baseURL: 'https://www.dnd5eapi.co/api', // where we are sending our requests to, we can append strings to the end when sending the requests
+  timeout: 3000 // how long to wait for a response in milliseconds before giving up and throwing an error
 })
 
 api.interceptors.request.use(config => config, handleAxiosError)

@@ -34,11 +34,13 @@ export class DNDSpellsController {
   drawSpells() {
     const spells = AppState.dndSpells
     let innerHTMLString = ''
+    // NOTE these are just POJOs in the appState, so we create a little template for them here in the forEach
     spells.forEach((spell) => {
       innerHTMLString += `
       <button onclick="app.DNDSpellsController.getSpellDetails('${spell.index}')" class="d-block btn btn-outline-info mb-1 w-100">${spell.name}</button>
       `
     })
+
     setHTML('dndSpellsList', innerHTMLString)
   }
 

@@ -1,13 +1,12 @@
 export class Spell {
   constructor(data) {
+    debugger
     // save the id from sandbox, or set it to string with no value
     this.id = data.id || ''
     this.name = data.name
-    // FIXME this is going to cause issues
-    // NOTE join is an array method that joins an array of strings into one single string with an optional seperator supplied as an argument
+    // NOTE join is an array method that joins an array of strings into one single string with an optional separator supplied as an argument
     this.description = data.desc?.join('<br><br>') || data.description
-    // NOTE if damage is falsy (undefined) default to ''. This only works if we use elvis operator
-    // NOTE check to see if damage is a string (came from codeworks API). If it is a string, save it to the model. Otherwise, check to see if we can drill into the object. If we can, save then name from the object. If we can't, save an empty string
+    // NOTE check to see if damage is a string (came from codeworks API). If it is a string, save it to the model. Otherwise, check to see if we can drill into the object. If we can, then save name from the object. If we can't, save an empty string
     this.damage = typeof data.damage == 'string' ? data.damage : data.damage?.damage_type.name || ''
     this.level = data.level
     this.range = data.range
@@ -19,14 +18,17 @@ export class Spell {
     this.castingTime = data.casting_time
     this.duration = data.duration
     this.prepared = data.prepared || false
+    // REVIEW goofy code below
     this.components = data.components.map(component => {
       switch (component) {
         case 'V':
-          return 'Visual'
+          return 'Verbal'
         case 'S':
           return 'Somatic'
         case 'M':
           return 'Material'
+        default:
+          return component
       }
     })
   }
